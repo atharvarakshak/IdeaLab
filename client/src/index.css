@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #000;
+    --foreground: #fff;
+
+    --muted: #666;
+    --muted-foreground: #eee;
+
+    --accent: #eee;
+    --accent-foreground: #000;
+
+    --popover: #000;
+    --popover-foreground: #eee;
+
+    --border: #333;
+    --input: #333;
+
+    --card: #000;
+    --card-foreground: #fff;
+
+    --primary: #fff;
+    --primary-foreground: #000;
+
+    --secondary: #ddd;
+    --secondary-foreground: #000;
+
+    --destructive: #999;
+    --destructive-foreground: #fff;
+
+    --ring: #333;
+
+    --radius: 0.75rem;
+  }
+}
+
+/* Custom gradients and effects */
+.glass-effect {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.gradient-border {
+  background: linear-gradient(
+    45deg,
+    rgba(123, 31, 162, 0.5),
+    rgba(103, 58, 183, 0.5),
+    rgba(244, 143, 177, 0.5)
+  );
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hover-card-effect {
+  transition: all 0.3s ease;
+}
+
+.hover-card-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
