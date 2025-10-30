@@ -1,13 +1,13 @@
 from google import genai
-from google.genai.types import Tool, GenerateContentConfig, GoogleSearch
+from google.genai import types
 import os
 import json
+# AIzaSyAIDTRs37prIes19fMICfl3JloUD5QmHos
+os.environ['GOOGLE_API_KEY'] = 'AIzaSyAIDTRs37prIes19fMICfl3JloUD5QmHos'
+genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
 
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyB3VW6jHB4a-q_uUn8KLNmOXwiDWtiO_IE'
-client = genai.Client(http_options={'api_version': 'v1alpha'})
-
-search_tool = {'google_search': {}}
-chat = client.chats.create(model='gemini-2.0-flash-exp', config={'tools': [search_tool]})
+model = genai.GenerativeModel('gemini-2.5-flash')
+chat = model.start_chat(history=[])
 
 idea = input("Kya khayal hai ??: ")
 

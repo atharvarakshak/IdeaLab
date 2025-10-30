@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Optional
 # from google  import genai
 import google.generativeai as genai
 
@@ -25,22 +26,21 @@ app.add_middleware(
 )
 
 # Initialize Google AI client
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyB3VW6jHB4a-q_uUn8KLNmOXwiDWtiO_IE'
-client = genai.Client(http_options={'api_version': 'v1alpha'})
+os.environ['GOOGLE_API_KEY'] = 'AIzaSyAIDTRs37prIes19fMICfl3JloUD5QmHos'
+genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
+model = genai.GenerativeModel('gemini-2.5-flash')
 
-class IdeaRequest(BaseModel):
-    idea: str
 # Pydantic model for request body
 class IdeaRequest(BaseModel):
     idea: str
-    initial_revenue: float | None = None
-    revenue_growth_rate: float | None = None
-    cogs_percentage: float | None = None
-    operating_expenses: float | None = None
-    initial_capital: float | None = None
-    monthly_burn_rate: float | None = None
-    customer_acquisition_cost: float | None = None
-    lifetime_value: float | None = None
+    initial_revenue: Optional[float] = None
+    revenue_growth_rate: Optional[float] = None
+    cogs_percentage: Optional[float] = None
+    operating_expenses: Optional[float] = None
+    initial_capital: Optional[float] = None
+    monthly_burn_rate: Optional[float] = None
+    customer_acquisition_cost: Optional[float] = None
+    lifetime_value: Optional[float] = None
 
 class Testimonial(BaseModel):
     text: str
@@ -83,7 +83,7 @@ async def generate_landing_page(request: IdeaRequest):
 async def analyze_idea(request: IdeaRequest):
     try:
         search_tool = {'google_search': {}}
-        chat = client.chats.create(model='gemini-2.0-flash-exp', config={'tools': [search_tool]})
+        chat = model.start_chat(history=[])
         
         # Move json_template into the function scope
         json_template = """{
@@ -222,7 +222,7 @@ async def analyze_market_data(request: IdeaRequest):
         - **Use exact values, no approximations like 'several billion'.**
         """
 
-        chat = client.chats.create(model='gemini-2.0-flash-exp')
+        chat = model.start_chat(history=[])
         response = chat.send_message(prompt)
 
         if not response or not response.candidates or not response.candidates[0].content:
@@ -268,7 +268,7 @@ async def generate_mvp_roadmap(request: IdeaRequest):
     try:
         # Define search tool configuration for Google AI
         search_tool = {'google_search': {}}
-        chat = client.chats.create(model='gemini-2.0-flash-exp', config={'tools': [search_tool]})
+        chat = model.start_chat(history=[])
 
         
         json_template = {
@@ -318,6 +318,14 @@ Important Instructions:
 2. Avoid placeholder text; provide specific, actionable recommendations.
 3. Include concise, practical insights.
 4. Use double quotes for all strings.
+5. Strictly follow the JSON template provided.
+6. Do not add any additional fields or properties to the JSON object.
+7. Do not add any additional text or formatting to the JSON object.
+8. Do not add any additional comments to the JSON object.
+9. Do not add any additional explanations to the JSON object.
+10. Do not add any additional notes to the JSON object.
+11. Do not add any additional information to the JSON object.
+12. Do not add any additional details to the JSON object.
 
 Return ONLY the JSON object without any additional text or formatting."""
 
