@@ -379,7 +379,7 @@ export default function CombinedDashboard() {
   );
 
   return (
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="light">
       <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
         {/* Sidebar */}
         <div className="w-64 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 fixed left-0 top-0 overflow-y-auto">
@@ -458,7 +458,7 @@ export default function CombinedDashboard() {
                 <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
                   Dashboard
                 </h2>
-                <ThemeToggle />
+                
               </div>
               <Card className="bg-white dark:bg-gray-800 border-0 backdrop-blur-lg">
                 <CardContent className="pt-6">
