@@ -27,12 +27,18 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
+// Theme-related imports
 import { ThemeProvider, useTheme } from "./components/ui/theme-provider";
+
+// Custom Components
 import Editor from "./components/Editor";
 import DownloadButton from "./components/DownloadButton";
 import MarketCharts from "./components/MarketCharts";
 import FinancialAnalysis from "./components/FinancialAnalysis";
 
+// ------------------------------------------------------------------------
+// Theme Toggle Button Component
+// ------------------------------------------------------------------------
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
