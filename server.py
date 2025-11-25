@@ -361,7 +361,6 @@ Return ONLY the JSON object without any additional text or formatting."""
 
 @app.post("/financial_analysis")  
 async def financial_analysis(request: FinancialAnalysisRequest):
-    # ... your code
     try:
         # Extract data from the request
         initial_revenue = request.initial_revenue
@@ -415,7 +414,6 @@ async def financial_analysis(request: FinancialAnalysisRequest):
                 "netProfitMargin": net_profit_margin,
             },
         }
-
         return response_data
 
     except Exception as e:
