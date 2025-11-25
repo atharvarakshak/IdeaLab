@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { ScrollArea } from "./components/ui/scroll-area";
 import { Button } from "./components/ui/button";
 import { Textarea } from "./components/ui/textarea";
+// Icons
 import {
   Loader2,
   CheckCircle,
@@ -28,6 +29,7 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
+
 import { ThemeProvider, useTheme } from "./components/ui/theme-provider";
 import Editor from "./components/Editor";
 import DownloadButton from "./components/DownloadButton";
