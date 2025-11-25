@@ -2,20 +2,20 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional
-# from google  import genai
+
+
 import google.generativeai as genai
+from google.generativeai import types
 
 import os
 import json
 import logging
-from ogbg.contentGen import generate_content  # Import Gemini utility function
+from ogbg.contentGen import generate_content
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-
 app = FastAPI()
-
 
 app.add_middleware(
     CORSMiddleware,
@@ -25,10 +25,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize Google AI client
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyAIDTRs37prIes19fMICfl3JloUD5QmHos'
-genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
-model = genai.GenerativeModel('gemini-2.5-flash')
+# ✅ Initialize Google AI client
+os.environ["GOOGLE_API_KEY"] = "AIzaSyC6xViOO62KpcEMrUMTPG99NjeVpwtPCrs"
+genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+
+# Initialize model properly
+model = genai.GenerativeModel("gemini-2.5-flash")
+
 
 # Pydantic model for request body
 class IdeaRequest(BaseModel):
@@ -156,10 +159,19 @@ Format your entire response as a JSON object with this exact structure:
 {json_template}
 
 Important Instructions:
-1. Ensure the response is valid JSON
+1. Ensure the response is valid JSON, Strictly stick to the JSON template provided!.
 2. Provide specific, actionable insights
 3. Use realistic market data and trends
-4. Keep responses concise but informative"""
+4. Keep responses concise but informative
+5. Strictly follow the JSON template provided.
+6. Do not add any additional fields or properties to the JSON object.
+7. Do not add any additional text or formatting to the JSON object.
+8. Do not add any additional comments to the JSON object.
+9. Do not add any additional explanations to the JSON object.
+10. Do not add any additional notes to the JSON object.
+11. Do not add any additional information to the JSON object.
+12. Do not add any additional details to the JSON object.
+"""
 
         response = chat.send_message(prompt)
         if not response or not response.candidates or not response.candidates[0].content:
@@ -314,18 +326,11 @@ Format your response as a JSON object using the following structure:
 {json_template}
 
 Important Instructions:
-1. Ensure the response is valid JSON.
+1. Ensure the response is valid JSON, Strictly stick to the JSON template provided!.
 2. Avoid placeholder text; provide specific, actionable recommendations.
 3. Include concise, practical insights.
 4. Use double quotes for all strings.
-5. Strictly follow the JSON template provided.
-6. Do not add any additional fields or properties to the JSON object.
-7. Do not add any additional text or formatting to the JSON object.
-8. Do not add any additional comments to the JSON object.
-9. Do not add any additional explanations to the JSON object.
-10. Do not add any additional notes to the JSON object.
-11. Do not add any additional information to the JSON object.
-12. Do not add any additional details to the JSON object.
+
 
 Return ONLY the JSON object without any additional text or formatting."""
 

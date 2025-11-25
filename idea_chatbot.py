@@ -22,7 +22,7 @@ class GeminiBrainstormBot:
         Initialize the brainstorming chatbot with the Gemini API key
         """
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel('gemini-1.5-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         self.chat = self.model.start_chat()
         self.conversations: Dict[str, List[Dict]] = {}
         self.state: Dict[str, bool] = {

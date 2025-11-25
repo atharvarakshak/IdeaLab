@@ -3,13 +3,13 @@ from google.genai import types
 import os
 import json
 # AIzaSyAIDTRs37prIes19fMICfl3JloUD5QmHos
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyAIDTRs37prIes19fMICfl3JloUD5QmHos'
+os.environ['GOOGLE_API_KEY'] = 'AIzaSyC6xViOO62KpcEMrUMTPG99NjeVpwtPCrs'
 genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
 
 model = genai.GenerativeModel('gemini-2.5-flash')
 chat = model.start_chat(history=[])
 
-idea = input("Kya khayal hai ??: ")
+idea = input("Kya khayal hai ??: ") 
 
 json= {
   "summary": "Concise overview of the response.",

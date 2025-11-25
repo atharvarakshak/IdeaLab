@@ -1,13 +1,20 @@
 import os
-from google import genai
-from google.genai.types import Tool, GenerateContentConfig, GoogleSearch
 import json
+from typing import Any, Dict
+
+try:
+    import google.generativeai as genai  # type: ignore[import-not-found]
+except Exception as import_error:
+    raise ImportError(
+        "Missing dependency 'google-generativeai'. Install with: pip install google-generativeai"
+    ) from import_error
 
 # Set up Gemini client
-os.environ['GOOGLE_API_KEY'] = 'AIzaSyB3VW6jHB4a-q_uUn8KLNmOXwiDWtiO_IE'  # Replace with your Gemini API key
-client = genai.Client(http_options={'api_version': 'v1alpha'})
+os.environ['GOOGLE_API_KEY'] = 'AIzaSyC6xViOO62KpcEMrUMTPG99NjeVpwtPCrs'  # Replace with your Gemini API key
+genai.configure(api_key=os.environ['GOOGLE_API_KEY'])
+model = genai.GenerativeModel('gemini-2.5-flash')
 
-def generate_content(idea: str) -> dict:
+def generate_content(idea: str) -> Dict[str, Any]:
     """
     Generate detailed landing page content using the Gemini model.
     """
@@ -62,38 +69,27 @@ def generate_content(idea: str) -> dict:
     """
 
     try:
-        # Create a chat session with Gemini
-        search_tool = {'google_search': {}}
-        chat = client.chats.create(model='gemini-2.0-flash-exp', config={'tools': [search_tool]})
+        response = model.generate_content(prompt)
+        full_response = (response.text or "").strip()
 
-        # Send the prompt to Gemini
-        response = chat.send_message(prompt)
-        if response and response.candidates and response.candidates[0].content:
-            full_response = ""
-            for part in response.candidates[0].content.parts:
-                if part.text:
-                    # Clean up the response text
-                    response_text = part.text.strip()
-                    # Remove markdown code block markers if present
-                    if response_text.startswith('```'):
-                        response_text = '\n'.join(response_text.split('\n')[1:-1])
-                    full_response += response_text
+        if full_response.startswith("```"):
+            stripped = full_response.splitlines()
+            if stripped and stripped[0].startswith("```") and stripped[-1].startswith("```"):
+                full_response = "\n".join(stripped[1:-1]).strip()
 
-            # Add validation for Gemini response
-            if not full_response.strip():
-                raise ValueError("Empty response from Gemini")
+        if not full_response:
+            raise ValueError("Empty response from Gemini")
 
-            content = json.loads(full_response)
-            
-            # Validate required fields
-            required_fields = ["navigation", "hero", "features", "testimonials", "pricing", "contact", "footer"]
+        content = json.loads(full_response)
+
+        required_fields = ["navigation", "hero", "features", "testimonials", "pricing", "contact", "footer"]
         for field in required_fields:
             if field not in content:
                 raise ValueError(f"Missing required field: {field}")
-                
+
         return content
-        
+
     except json.JSONDecodeError as e:
-        raise Exception(f"Invalid JSON from Gemini: {full_response}")
+        raise Exception(f"Invalid JSON from Gemini: {full_response}") from e
     except Exception as e:
-        raise Exception(f"Content generation failed: {str(e)}")
+        raise Exception(f"Content generation failed: {str(e)}") from e
