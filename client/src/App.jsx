@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
+// UI Components (ShadCN)
 import {
   Card,
   CardContent,
@@ -12,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import { ScrollArea } from "./components/ui/scroll-area";
 import { Button } from "./components/ui/button";
 import { Textarea } from "./components/ui/textarea";
+// Icons
 import {
   Loader2,
   CheckCircle,
@@ -27,12 +29,19 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
+
+// Theme-related imports
 import { ThemeProvider, useTheme } from "./components/ui/theme-provider";
+
+// Custom Components
 import Editor from "./components/Editor";
 import DownloadButton from "./components/DownloadButton";
 import MarketCharts from "./components/MarketCharts";
 import FinancialAnalysis from "./components/FinancialAnalysis";
 
+// ------------------------------------------------------------------------
+// Theme Toggle Button Component
+// ------------------------------------------------------------------------
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
