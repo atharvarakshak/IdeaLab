@@ -41,12 +41,12 @@ function ThemeToggle() {
       variant="ghost"
       size="icon"
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-      className="fixed top-4 right-4"
+      className="fixed top-4 right-4 z-50 glass-effect rounded-full w-12 h-12 hover:scale-110 transition-transform duration-200 shadow-lg hover:shadow-xl"
     >
       {theme === "light" ? (
-        <Moon className="h-5 w-5" />
+        <Moon className="h-5 w-5 text-gray-700" />
       ) : (
-        <Sun className="h-5 w-5" />
+        <Sun className="h-5 w-5 text-yellow-500" />
       )}
     </Button>
   );
@@ -380,13 +380,18 @@ export default function CombinedDashboard() {
 
   return (
     <ThemeProvider defaultTheme="light">
-      <div className="flex min-h-screen bg-gray-50 dark:bg-gray-950">
+      <div className="flex min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
         {/* Sidebar */}
-        <div className="w-64 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 fixed left-0 top-0 overflow-y-auto">
+        <div className="w-64 h-screen glass-effect border-r border-white/20 dark:border-gray-800/50 fixed left-0 top-0 overflow-y-auto z-10">
           <div className="p-6">
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-8">
-              StartupLaunch
-            </h1>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+                <Lightbulb className="w-6 h-6 text-white" />
+              </div>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                StartupLaunch
+              </h1>
+            </div>
             <nav className="space-y-6">
               <div className="space-y-2">
                 <h2 className="text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">
@@ -395,24 +400,24 @@ export default function CombinedDashboard() {
                 <div className="space-y-1">
                   <a
                     href="#overview"
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 "
+                    className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 px-3 py-2.5 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105"
                   >
-                    <Target className="w-4 h-4" />
-                    Overview
+                    <Target className="w-4 h-4 text-blue-500" />
+                    <span className="font-medium">Overview</span>
                   </a>
                   <a
                     href="#validation"
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 "
+                    className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 px-3 py-2.5 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105"
                   >
-                    <ChartBar className="w-4 h-4" />
-                    Validation Score
+                    <ChartBar className="w-4 h-4 text-green-500" />
+                    <span className="font-medium">Validation Score</span>
                   </a>
                   <a
                     href="#market"
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 "
+                    className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 px-3 py-2.5 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105"
                   >
-                    <TrendingUp className="w-4 h-4" />
-                    Market Analysis
+                    <TrendingUp className="w-4 h-4 text-purple-500" />
+                    <span className="font-medium">Market Analysis</span>
                   </a>
                 </div>
               </div>
@@ -424,24 +429,24 @@ export default function CombinedDashboard() {
                 <div className="space-y-1">
                   <a
                     href="#mvp"
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 "
+                    className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 px-3 py-2.5 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105"
                   >
-                    <Target className="w-4 h-4" />
-                    MVP Roadmap
+                    <Target className="w-4 h-4 text-indigo-500" />
+                    <span className="font-medium">MVP Roadmap</span>
                   </a>
                   <a
                     href="#landing"
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 "
+                    className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 px-3 py-2.5 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105"
                   >
-                    <Lightbulb className="w-4 h-4" />
-                    Landing Page
+                    <Lightbulb className="w-4 h-4 text-yellow-500" />
+                    <span className="font-medium">Landing Page</span>
                   </a>
                   <a
                     href="/finance"
-                    className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 px-3 py-2 "
+                    className="flex items-center gap-3 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-blue-900/20 dark:hover:to-purple-900/20 px-3 py-2.5 rounded-lg transition-all duration-200 hover:shadow-md hover:scale-105"
                   >
-                    <DollarSign className="w-4 h-4" />
-                    Financial Analysis
+                    <DollarSign className="w-4 h-4 text-emerald-500" />
+                    <span className="font-medium">Financial Analysis</span>
                   </a>
                 </div>
               </div>
@@ -454,41 +459,56 @@ export default function CombinedDashboard() {
           <div className="p-8">
             {/* Top Bar with Input */}
             <div className="mb-8">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-                  Dashboard
-                </h2>
-                
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                    Dashboard
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mt-1">Transform your ideas into reality</p>
+                </div>
+                <ThemeToggle />
               </div>
-              <Card className="bg-white dark:bg-gray-800 border-0 backdrop-blur-lg">
-                <CardContent className="pt-6">
-                  <form onSubmit={analyzeIdea} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                        Describe your startup idea
-                      </label>
-                      <Textarea
-                        value={idea}
-                        onChange={(e) => setIdea(e.target.value)}
-                        placeholder="Enter your startup idea here..."
-                        className="min-h-[100px] w-full"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-black"
-                    >
-                      {loading ? (
-                        <Loader2 className="w-5 h-5 animate-spin mr-2" />
-                      ) : (
-                        <Lightbulb className="w-5 h-5 mr-2" />
-                      )}
-                      {loading ? "Analyzing..." : "Analyze Idea"}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Card className="glass-effect border-0 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                  <CardContent className="pt-6">
+                    <form onSubmit={analyzeIdea} className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                          Describe your startup idea
+                        </label>
+                        <Textarea
+                          value={idea}
+                          onChange={(e) => setIdea(e.target.value)}
+                          placeholder="Enter your startup idea here... Let's build something amazing together! 💡"
+                          className="min-h-[120px] w-full border-2 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400 rounded-xl transition-all duration-200"
+                        />
+                      </div>
+                      <Button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 hover:from-blue-700 hover:via-purple-700 hover:to-pink-700 text-white font-semibold py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {loading ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                            Analyzing your idea...
+                          </>
+                        ) : (
+                          <>
+                            <Lightbulb className="w-5 h-5 mr-2" />
+                            Analyze Idea
+                            <ArrowRight className="w-5 h-5 ml-2" />
+                          </>
+                        )}
+                      </Button>
+                    </form>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
             {/* Analysis Results */}
             {(response ||
@@ -1073,18 +1093,45 @@ export default function CombinedDashboard() {
 
         {/* Loading Overlay */}
         {loading && (
-          <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
-            <Card className="w-[300px] bg-white/90 dark:bg-gray-900/90">
-              <CardContent className="pt-6">
-                <div className="flex flex-col items-center gap-4">
-                  <Loader2 className="w-8 h-8 text-blue-600 animate-spin" />
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Analyzing your idea...
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/30 backdrop-blur-md flex items-center justify-center z-50"
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              <Card className="w-[350px] glass-effect border-0 shadow-2xl">
+                <CardContent className="pt-8 pb-8">
+                  <div className="flex flex-col items-center gap-6">
+                    <div className="relative">
+                      <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
+                      <div className="absolute inset-0 w-12 h-12 border-4 border-purple-200 dark:border-purple-800 rounded-full animate-ping opacity-75"></div>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">
+                        Analyzing your idea...
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        This may take a few moments
+                      </p>
+                    </div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                      <motion.div
+                        className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"
+                        initial={{ width: "0%" }}
+                        animate={{ width: "100%" }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </motion.div>
         )}
       </div>
     </ThemeProvider>
